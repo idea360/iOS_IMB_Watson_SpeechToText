@@ -140,6 +140,13 @@ class ViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDe
                                 self.resultTextLabel.textColor = UIColor.redColor()
                             }
                         })
+                    } else {
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.resultTextLabel.text = "No results found. Please try again."
+                            self.resultTextLabel.textColor = UIColor.redColor()
+                            self.spinner.hidden = true
+                            self.spinner.stopAnimating()
+                        })
                     }
                     
                 } catch let err as NSError{
