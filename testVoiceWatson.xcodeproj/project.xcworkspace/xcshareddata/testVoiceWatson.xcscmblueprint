@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "41F7519B597342B95306A403934311A58C7C6B9C",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "41F7519B597342B95306A403934311A58C7C6B9C" : 0,
+    "EF267634675BA58AD124B33D145E7BC0F1AF7CB5" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "3DF9CE10-A460-4F80-B83A-DC507690BF9F",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "41F7519B597342B95306A403934311A58C7C6B9C" : "testVoiceWatson\/",
+    "EF267634675BA58AD124B33D145E7BC0F1AF7CB5" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "testVoiceWatson",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "testVoiceWatson.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:idea360\/iOS_IMB_Watson_SpeechToText.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "41F7519B597342B95306A403934311A58C7C6B9C"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:idea360\/xcodeprojects.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "EF267634675BA58AD124B33D145E7BC0F1AF7CB5"
+    }
+  ]
+}

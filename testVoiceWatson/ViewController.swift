@@ -36,6 +36,11 @@ class ViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDe
         // Do any additional setup after loading the view, typically from a nib.
         
         spinner.hidden = true
+        recordOutlet.layer.borderWidth = 1.0
+        recordOutlet.layer.masksToBounds = false
+        recordOutlet.layer.borderColor = UIColor.blackColor().CGColor
+        recordOutlet.layer.cornerRadius = (recordOutlet.frame.size.width / 2)
+        recordOutlet.clipsToBounds = true
         
         AVAudioSession.sharedInstance().requestRecordPermission({(granted: Bool)-> Void in
             if granted {
@@ -120,29 +125,35 @@ class ViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDe
                 do {
                     let response = try NSJSONSerialization.JSONObjectWithData(urlData, options: NSJSONReadingOptions.MutableLeaves) as! NSDictionary
                 
-                    let res = response["results"] as! NSArray
+                    if let res = response["results"] {
+                        let resArr = res as! NSArray
                     
-                    if res.count > 0 {
-                        let firstRes = res[0] as! NSDictionary
-                    
-                        let alts = firstRes["alternatives"] as! NSArray
-                    
-                        let firstAlt = alts[0] as! NSDictionary
-                    
-                        let text = firstAlt["transcript"]! as! String
-                        let confidence = firstAlt["confidence"] as! Float
+                        if resArr.count > 0 {
+                            let firstRes = resArr[0] as! NSDictionary
+                            let alts = firstRes["alternatives"] as! NSArray
+                            let firstAlt = alts[0] as! NSDictionary
+                            let text = firstAlt["transcript"]! as! String
+                            let confidence = firstAlt["confidence"] as! Float
                         
-                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            self.resultTextLabel.text = text
-                            self.spinner.hidden = true
-                            self.spinner.stopAnimating()
+                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                self.resultTextLabel.text = text
+                                self.spinner.hidden = true
+                                self.spinner.stopAnimating()
                             
-                            if confidence > 0.6 {
-                                self.resultTextLabel.textColor = UIColor.greenColor()
-                            } else {
+                                if confidence > 0.6 {
+                                    self.resultTextLabel.textColor = UIColor.greenColor()
+                                } else {
+                                    self.resultTextLabel.textColor = UIColor.redColor()
+                                }
+                            })
+                        } else {
+                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                self.resultTextLabel.text = "No results found. Please try again."
                                 self.resultTextLabel.textColor = UIColor.redColor()
-                            }
-                        })
+                                self.spinner.hidden = true
+                                self.spinner.stopAnimating()
+                            })
+                        }
                     } else {
                         dispatch_async(dispatch_get_main_queue(), { () -> Void in
                             self.resultTextLabel.text = "No results found. Please try again."
@@ -151,12 +162,17 @@ class ViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDe
                             self.spinner.stopAnimating()
                         })
                     }
-                    
                 } catch let err as NSError{
                     print(err.localizedDescription)
                 }
             } else {
                 print(error?.localizedDescription)
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.resultTextLabel.text = error!.localizedDescription
+                    self.resultTextLabel.textColor = UIColor.redColor()
+                    self.spinner.hidden = true
+                    self.spinner.stopAnimating()
+                })
             }
         }
         
