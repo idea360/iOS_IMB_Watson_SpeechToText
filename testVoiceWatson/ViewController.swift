@@ -15,12 +15,15 @@ class ViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDe
     let username = "username"
     let password = "password"
     
+    @IBOutlet weak var recordOutlet: UIButton!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var resultTextLabel: UILabel!
     @IBAction func recordTouchDown(sender: AnyObject) {
+        self.recordOutlet.backgroundColor = UIColor.redColor()
         recordAudio()
     }
     @IBAction func recordTouchUpInside(sender: AnyObject) {
+        self.recordOutlet.backgroundColor = UIColor.clearColor()
         stopRecordAudio()
     }
 
